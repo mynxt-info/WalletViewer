@@ -37,11 +37,13 @@ Build in Windows
   5. Download and install Git
     http://git-scm.com/download/win
 
-  6. Setup your environment and build
+  6. Setup your environment
 
         set QT4DIR=C:\path\to\qt4
         set PATH=$QT4DIR\bin;%PATH%
         set POLARSSL_HOME=C:\path\to\polarssl
+
+  7. Get the source code and build
         git clone https://github.com/CauldronDevelopmentLLC/myNXTWalletViewer.git
         cd myNXTWalletViewer
         scons
