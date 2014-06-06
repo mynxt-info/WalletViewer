@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>myNXT.info-logo.png</file>
+    </qresource>
+</RCC>

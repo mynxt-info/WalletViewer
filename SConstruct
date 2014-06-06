@@ -16,7 +16,7 @@ if not env.GetOption('clean'):
 
     conf.CheckLib('polarssl')
 
-    env.Append(CPPDEFINES = ['DEBUG'])
+    #env.Append(CPPDEFINES = ['DEBUG'])
 
 conf.Finish()
 
@@ -32,8 +32,7 @@ env.AppendUnique(CPPPATH = ['#/build'])
 
 # Qt
 uic = [env.Uic4('build/ui_mainwindow.h', 'qt/mainwindow.ui')]
-#qrc = env.Qrc4('build/qrc_resources.cpp', 'qt/resources.qrc')
-#src += qrc
+src += env.Qrc4('build/resources.cpp', 'qt/resources.qrc')
 
 
 # Build

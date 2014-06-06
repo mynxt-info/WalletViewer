@@ -1,7 +1,15 @@
 myNXTWalletViewer
 =================
 
-Wallet decryptor and viewer for myNXT.info
+Wallet decrypter and viewer for http://wallet.myNXT.info/
+
+Build
+=====
+To build this software you will need:
+
+  * SCons
+  * Qt 4
+  * PolarSSL
 
 Example
 =======
