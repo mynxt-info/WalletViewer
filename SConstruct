@@ -20,7 +20,7 @@ if not env.GetOption('clean'):
         env.Append(CPPPATH = [polarssl_home + '/include'])
 
     if not conf.CheckLib('polarssl') or not conf.CheckHeader('polarssl/aes.h'):
-        raise 'Need PolarSSL'
+        raise Exception, 'Need PolarSSL'
 
     #env.Append(CPPDEFINES = ['DEBUG'])
 

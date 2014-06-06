@@ -4,7 +4,6 @@
 #if defined(_WIN32) && _MSC_VER < 1600
 #include <limits.h>
 
-namespace {
 #if !defined(int8_t)
   typedef __int8            int8_t;
 #endif
@@ -36,7 +35,6 @@ namespace {
 #if !defined(uint64_t)
   typedef unsigned __int64  uint64_t;
 #endif
-}
 
 #else
 #include <stdint.h>
