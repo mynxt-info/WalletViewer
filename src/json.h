@@ -18,16 +18,9 @@
 extern "C" {
 #endif
 
-#include <stdlib.h>
+#include <StdTypes.h>
 
-#if defined(_MSC_VER) && (_MSC_VER < 1600)
-// MSVC does not include stdint.h before version 10.0
-typedef unsigned __int8 uint8_t;
-typedef unsigned __int16 uint16_t;
-typedef unsigned __int32 uint32_t;
-#else
-#include <stdint.h>
-#endif
+#include <stdlib.h>
 
 #define JSON_MAJOR 	1
 #define JSON_MINOR	0
