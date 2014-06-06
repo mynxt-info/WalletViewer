@@ -14,7 +14,13 @@ if not env.GetOption('clean'):
     # Qt
     env.EnableQt4Modules('QtCore QtGui'.split())
 
-    conf.CheckLib('polarssl')
+    polarssl_home = os.environ.get('POLARSSL_HOME')
+    if polarssl_home:
+        env.Append(LIBPATH = [polarssl_home])
+        env.Append(CPPPATH = [polarssl_home + '/include'])
+
+    if not conf.CheckLib('polarssl') or not conf.CheckHeader('polarssl/aes.h'):
+        raise 'Need PolarSSL'
 
     #env.Append(CPPDEFINES = ['DEBUG'])
 
