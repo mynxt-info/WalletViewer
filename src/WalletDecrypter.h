@@ -2,10 +2,9 @@
 #define MYNXT_WALLET_DECRYPTER_H
 
 #include "ui_mainwindow.h"
+#include "StdTypes.h"
 
 #include <QtGui>
-
-#include <stdint.h>
 
 #include <string>
 
