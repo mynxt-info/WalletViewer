@@ -44,6 +44,7 @@ Build in Windows
         set POLARSSL_HOME=C:\path\to\polarssl
 
   7. Get the source code and build
+
         git clone https://github.com/CauldronDevelopmentLLC/myNXTWalletViewer.git
         cd myNXTWalletViewer
         scons
