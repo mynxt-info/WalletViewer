@@ -38,6 +38,7 @@ Build in Windows
     http://git-scm.com/download/win
 
   6. Setup your environment and build
+
             set QT4DIR=C:\path\to\qt4
             set PATH=$QT4DIR\bin;%PATH%
             set POLARSSL_HOME=C:\path\to\polarssl
