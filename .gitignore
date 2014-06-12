@@ -19,3 +19,14 @@
 *.exe
 *.out
 *.app
+
+# Python files
+*.pyc
+
+# Backup files
+*~
+
+# Build files
+.scon*
+config.log
+build

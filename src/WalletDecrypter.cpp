@@ -12,6 +12,8 @@
 #include <stdexcept>
 #include <iomanip>
 
+#include <sys/stat.h>
+
 using namespace myNXT;
 using namespace std;
 
@@ -160,6 +162,10 @@ void WalletDecrypter::on_openWalletPushButton_clicked() {
     QStringList names = fileDialog.selectedFiles();
     if (!names.size()) return;
     string path = names.at(0).toAscii().data();
+
+    struct stat statBuf;
+    if (stat(path.c_str(), &statBuf) == -1)
+      throw runtime_error("File '" + path + "' does not exist");
 
 #if DEBUG
     cout << "Opening: " << path << endl;
