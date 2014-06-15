@@ -90,6 +90,7 @@ string WalletDecrypter::decrypt(const string &path, const string &passphrase) {
   in.seekg(0);
   in.read((char *)buf.ptr, size);
   if (in.gcount() != size) throw runtime_error("Failed to read " + path);
+  in.close();
 
   // Translate base 64
   for (unsigned i = 0; i < size; i++)
