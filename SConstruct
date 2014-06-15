@@ -14,6 +14,13 @@ if not env.GetOption('clean'):
     # Qt
     env.EnableQt4Modules('QtCore QtGui'.split())
 
+    if env.get('static', 0) and env['PLATFORM'] == 'win32':
+        env.Append(LINKFLAGS =
+                   ['/NODEFAULTLIB:LIBCMTD', '/NODEFAULTLIB:MSVCRT'])
+        env.Replace(CPPDEFINES = ['STATIC', 'QT_STATIC', 'QT_NODLL'])
+        env.Append(LIBS = ('winspool gdi32 imm32 advapi32 comdlg32 ws2_32 ' +
+                           'shell32 winmm').split())
+
     polarssl_home = os.environ.get('POLARSSL_HOME')
     if polarssl_home:
         env.Append(LIBPATH = [polarssl_home])
