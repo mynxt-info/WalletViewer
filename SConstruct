@@ -14,7 +14,7 @@ if not env.GetOption('clean'):
     # Qt
     env.EnableQt4Modules('QtCore QtGui'.split())
 
-    if env.get('static', 0) and env['PLATFORM'] == 'win32':
+    if env['PLATFORM'] == 'win32':
         env.Append(LINKFLAGS =
                    ['/NODEFAULTLIB:LIBCMTD', '/NODEFAULTLIB:MSVCRT'])
         env.Replace(CPPDEFINES = ['STATIC', 'QT_STATIC', 'QT_NODLL'])
