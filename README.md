@@ -1,5 +1,5 @@
-myNXTWalletViewer
-=================
+myNXT.info Wallet Viewer
+========================
 
 Wallet decrypter and viewer for http://wallet.myNXT.info/
 
@@ -15,8 +15,8 @@ Build in Debian or Ubuntu Linux
 ===============================
 
     sudo apt-get install scons libqt4-dev libpolarssl-dev git
-    git clone https://github.com/mynxt-info/myNXTWalletViewer.git
-    cd myNXTWalletViewer
+    git clone https://github.com/mynxt-info/WalletViewer.git
+    cd WalletViewer
     scons
 
 Build in Windows
@@ -45,8 +45,8 @@ Build in Windows
 
   7. Get the source code and build
 
-        git clone https://github.com/mynxt-info/myNXTWalletViewer.git
-        cd myNXTWalletViewer
+        git clone https://github.com/mynxt-info/WalletViewer.git
+        cd WalletViewer
         scons
 
 Example
