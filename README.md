@@ -15,7 +15,7 @@ Build in Debian or Ubuntu Linux
 ===============================
 
     sudo apt-get install scons libqt4-dev libpolarssl-dev git
-    git clone https://github.com/CauldronDevelopmentLLC/myNXTWalletViewer.git
+    git clone https://github.com/mynxt-info/myNXTWalletViewer.git
     cd myNXTWalletViewer
     scons
 
@@ -45,7 +45,7 @@ Build in Windows
 
   7. Get the source code and build
 
-        git clone https://github.com/CauldronDevelopmentLLC/myNXTWalletViewer.git
+        git clone https://github.com/mynxt-info/myNXTWalletViewer.git
         cd myNXTWalletViewer
         scons
 
