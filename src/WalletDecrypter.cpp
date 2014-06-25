@@ -52,7 +52,7 @@ string WalletDecrypter::getPassphrase() {
 
 
 void WalletDecrypter::computeKey(const string &passphrase,
-                                 const uint8_t salt[8], uint8_t key[32]) {
+                                 const uint8_t salt[24], uint8_t key[32]) {
   // Init context
   const md_info_t *info = md_info_from_type(POLARSSL_MD_SHA256);
   if (!info) throw runtime_error("Failed to get digest context info");
@@ -62,13 +62,13 @@ void WalletDecrypter::computeKey(const string &passphrase,
     throw runtime_error("Failed to init digest context");
 
   if (pkcs5_pbkdf2_hmac(&ctx, (uint8_t *)passphrase.c_str(),
-                        passphrase.length(), salt, 8, PKCS5_ITERATIONS, 32,
+                        passphrase.length(), salt, 24, PKCS5_ITERATIONS, 32,
                         key))
     throw runtime_error("Failed to compute key from passphrase");
 
 #if DEBUG
   cout << "Salt: ";
-  for (unsigned i = 0; i < 8; i++)
+  for (unsigned i = 0; i < 24; i++)
     cout << setfill('0') << hex << setw(2) << (unsigned)salt[i];
   cout << endl;
 
@@ -85,9 +85,14 @@ string WalletDecrypter::decrypt(const string &path, const string &passphrase) {
   ifstream in(path.c_str(), ios::binary | ios::ate);
   if (!in.is_open()) throw runtime_error("Failed to open " + path);
   streampos size = in.tellg();
+  in.seekg(0);
+
+  // Read salt
+  uint8_t salt[24];
+  in.read((char *)salt, 24);
+  size -= 24;
 
   SmartArrayPointer<uint8_t> buf = new uint8_t[size];
-  in.seekg(0);
   in.read((char *)buf.ptr, size);
   if (in.gcount() != size) throw runtime_error("Failed to read " + path);
   in.close();
@@ -112,12 +117,12 @@ string WalletDecrypter::decrypt(const string &path, const string &passphrase) {
     throw runtime_error("Failed to decode base64: " + path);
 
   // Check that data fits block size
-  if ((dataSize & 15) != 8)
+  if ((dataSize & 15) != 0)
     throw runtime_error("Failed data not in 16-byte blocks: " + path);
 
-  // Setup the key.  Note salt is in bytes 0-8.
+  // Setup the key
   uint8_t key[32];
-  computeKey(passphrase, data.ptr, key);
+  computeKey(passphrase, salt, key);
 
   // Decrypt
   SmartArrayPointer<uint8_t> output = new uint8_t[dataSize];
@@ -127,12 +132,11 @@ string WalletDecrypter::decrypt(const string &path, const string &passphrase) {
     throw runtime_error("Failed to setup AES decryption");
 
   for (unsigned i = 0; i < blocks; i++)
-    if (aes_crypt_ecb(&ctx, AES_DECRYPT, data.ptr + i * 16 + 8,
+    if (aes_crypt_ecb(&ctx, AES_DECRYPT, data.ptr + i * 16,
                       output.ptr + i * 16))
       throw runtime_error("Decrypt failed");
 
   // Subtract salt length and remove padding
-  dataSize -= 8;
   while (output.ptr[dataSize - 1] == 0) dataSize--;
 
   return string((char *)output.ptr, dataSize);

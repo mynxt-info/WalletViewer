@@ -39,7 +39,7 @@ namespace myNXT {
     WalletDecrypter();
 
     std::string getPassphrase();
-    void computeKey(const std::string &passphrase, const uint8_t salt[8],
+    void computeKey(const std::string &passphrase, const uint8_t salt[24],
                     uint8_t key[32]);
     std::string decrypt(const std::string &path, const std::string &passphrase);
     void addAccount(const std::string &id, const std::string &password);
