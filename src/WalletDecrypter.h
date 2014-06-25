@@ -47,7 +47,7 @@ namespace myNXT {
   protected slots:
     void on_openWalletPushButton_clicked();
     void on_accountsTableWidget_customContextMenuRequested(QPoint point);
-    void on_actionCopy_activated();
+    void on_actionCopy_triggered();
 
   public:
     int jsonCallback(int type, const char *data, uint32_t length);

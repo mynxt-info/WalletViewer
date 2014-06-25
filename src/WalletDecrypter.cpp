@@ -229,7 +229,7 @@ on_accountsTableWidget_customContextMenuRequested(QPoint point) {
 }
 
 
-void WalletDecrypter::on_actionCopy_activated() {
+void WalletDecrypter::on_actionCopy_triggered() {
   if (!selectedItem) return;
   QApplication::clipboard()->setText(selectedItem->text());
 }
