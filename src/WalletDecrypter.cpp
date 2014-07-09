@@ -92,6 +92,11 @@ string WalletDecrypter::decrypt(const string &path, const string &passphrase) {
   in.read((char *)salt, 24);
   size -= 24;
 
+  // Read initialization vector
+  uint8_t iv[16];
+  in.read((char *)iv, 16);
+  size -= 16;
+
   SmartArrayPointer<uint8_t> buf = new uint8_t[size];
   in.read((char *)buf.ptr, size);
   if (in.gcount() != size) throw runtime_error("Failed to read " + path);
@@ -126,15 +131,12 @@ string WalletDecrypter::decrypt(const string &path, const string &passphrase) {
 
   // Decrypt
   SmartArrayPointer<uint8_t> output = new uint8_t[dataSize];
-  unsigned blocks = dataSize / 16;
   aes_context ctx;
   if (aes_setkey_dec(&ctx, key, 256))
     throw runtime_error("Failed to setup AES decryption");
 
-  for (unsigned i = 0; i < blocks; i++)
-    if (aes_crypt_ecb(&ctx, AES_DECRYPT, data.ptr + i * 16,
-                      output.ptr + i * 16))
-      throw runtime_error("Decrypt failed");
+  if (aes_crypt_cbc(&ctx, AES_DECRYPT, dataSize, iv, data.ptr, output.ptr))
+    throw runtime_error("Decrypt failed");
 
   // Subtract salt length and remove padding
   while (output.ptr[dataSize - 1] == 0) dataSize--;
