@@ -44,7 +44,7 @@ string WalletDecrypter::getPassphrase() {
   bool ok = false;
 
   QString text = QInputDialog::getText(this, "Wallet Passphrase",
-                                       tr("Enter passphrase:"),
+                                       tr("Enter MyNxt master password:"),
                                        QLineEdit::Password,
                                        QString(), &ok);
   return (ok && !text.isEmpty()) ? text.toAscii().data() : "";
