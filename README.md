@@ -14,7 +14,22 @@ To build this software you will need:
 Build in Debian or Ubuntu Linux
 ===============================
 
+For Ubuntu up to 14.10,
+
     sudo apt-get install scons libqt4-dev libpolarssl-dev git
+    git clone https://github.com/mynxt-info/WalletViewer.git
+    cd WalletViewer
+    scons
+
+For Ubuntu 16.04 and later,
+
+    wget https://tls.mbed.org/download/polarssl-1.3.9-gpl.tgz
+    tar xvfz polarssl-1.3.9-gpl.tgz
+    cd polarssl-1.3.9
+    make
+    sudo make install
+    cd ..
+    sudo apt install scons libqt4-dev git
     git clone https://github.com/mynxt-info/WalletViewer.git
     cd WalletViewer
     scons
