@@ -11,8 +11,8 @@ To build this software you will need:
   * Qt 4
   * PolarSSL
 
-Build in Debian or Ubuntu Linux
-===============================
+Build in Ubuntu Linux
+=====================
 
 For Ubuntu up to 14.10,
 
@@ -54,15 +54,15 @@ Build in Windows
 
   6. Setup your environment
 
-        set QT4DIR=C:\path\to\qt4
-        set PATH=$QT4DIR\bin;%PATH%
-        set POLARSSL_HOME=C:\path\to\polarssl
+    set QT4DIR=C:\path\to\qt4
+    set PATH=$QT4DIR\bin;%PATH%
+    set POLARSSL_HOME=C:\path\to\polarssl
 
   7. Get the source code and build
 
-        git clone https://github.com/mynxt-info/WalletViewer.git
-        cd WalletViewer
-        scons
+    git clone https://github.com/mynxt-info/WalletViewer.git
+    cd WalletViewer
+    scons
 
 Example
 =======
